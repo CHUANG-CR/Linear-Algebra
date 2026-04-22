@@ -1,5 +1,6 @@
 #include <iostream>
 #include <iomanip>
+#include <cmath>
 
 using namespace std;
 
@@ -51,12 +52,12 @@ int main() {
     }
 
     cout << "\n=== 簡化列列梯形 ===" << endl;
-    cout << fixed << setprecision(3);
+    //cout << fixed << setprecision(3);
     for (int i = 0; i < m; i++) {
         for (int j = 0; j < n; j++) {
             double val = A[i][j];
-            if (val > -0.0001 && val < 0.0001) val = 0.000;
-            cout << setw(8) << val << " ";
+            if (abs(val) < 1e-9) val = 0; 
+            cout << val << "\t";
         }
         cout << "\n";
     }
