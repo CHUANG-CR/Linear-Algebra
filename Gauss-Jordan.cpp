@@ -25,7 +25,7 @@ int main() {
         int maxRow = row;
         for (int k = row + 1; k < n; ++k) {
             if (abs(matrix[k][col]) > abs(matrix[maxRow][col])) {
-                maxRow = k
+                maxRow = k;
                 }
         }
         if (abs(matrix[maxRow][col]) < 1e-9) {
