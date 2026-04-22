@@ -1,6 +1,5 @@
 #include <iostream>
-#include <vector>
-#include <cmath>
+#include <iomanip>
 
 using namespace std;
 
@@ -12,53 +11,54 @@ int main() {
     cout << "請輸入矩陣的行:";
     cin >> m;
 
-    vector<vector<double>> matrix(n, vector<double>(m));
-    cout << "請輸入 " << n << " x " << m << " 的矩陣:" << endl;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
-            cin >> matrix[i][j];
-        }
+    double** A = new double*[m];
+    for (int i = 0; i < m; i++) {
+        A[i] = new double[n];
     }
 
-    int row = 0;
-    for (int col = 0; col < m && row < n; ++col) {
-        int maxRow = row;
-        for (int k = row + 1; k < n; ++k) {
-            if (abs(matrix[k][col]) > abs(matrix[maxRow][col])) {
-                maxRow = k;
-                }
-        }
-        if (abs(matrix[maxRow][col]) < 1e-9) {
-            continue; 
-            }
-        swap(matrix[row], matrix[maxRow]);
+    cout << "輸入矩陣:\n";
+    for (int i = 0; i < m; i++)
+        for (int j = 0; j < n; j++)
+            cin >> A[i][j];
 
-        double pivot = matrix[row][col];
-        for (int j = col; j < m; ++j) {
-            matrix[row][j] /= pivot;
-        }
+    int k = 0;
+    for (int c = 0; c < n && k < m; c++) {
+        int p = k;
+        while (p < m && A[p][c] == 0) p++;
+        if (p == m) continue;
 
-        for (int k = 0; k < n; ++k) {
-            if (k != row) {
-                double factor = matrix[k][col];
-                for (int j = col; j < m; ++j) {
-                    matrix[k][j] -= factor * matrix[row][j];
-                }
+        if (p != k) {
+            for (int j = 0; j < n; j++) {
+                double temp = A[k][j];
+                A[k][j] = A[p][j];
+                A[p][j] = temp;
             }
         }
-        
-        row++; 
+
+        double div = A[k][c];
+        for (int j = c; j < n; j++) {
+            A[k][j] /= div;
+        }
+
+        for (int i = 0; i < m; i++) {
+            if (i == k) continue;
+            double mul = A[i][c];
+            for (int j = c; j < n; j++) {
+                A[i][j] -= mul * A[k][j];
+            }
+        }
+        k++;
     }
 
     cout << "\n=== 簡化列列梯形 ===" << endl;
-    for (int i = 0; i < n; ++i) {
-        for (int j = 0; j < m; ++j) {
-            double val = matrix[i][j];
-            if (abs(val) < 1e-9) val = 0; 
-            cout << val << "\t";
+    cout << fixed << setprecision(3);
+    for (int i = 0; i < m; i++) {
+        for (int j = 0; j < n; j++) {
+            double val = A[i][j];
+            if (val > -0.0001 && val < 0.0001) val = 0.000;
+            cout << setw(8) << val << " ";
         }
-        cout << endl;
+        cout << "\n";
     }
     return 0;
 }
-
