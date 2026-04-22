@@ -5,7 +5,7 @@
 using namespace std;
 
 int main() {
-    cout << "高斯喬登消去法計算程式" << endl;
+    cout << "高斯喬登消去法求簡化列梯形" << endl;
     int n, m;
     cout << "請輸入矩陣的列:";
     cin >> n;
