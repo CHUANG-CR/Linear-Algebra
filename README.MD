@@ -1,20 +1,20 @@
 # 線性代數
 
-## 高斯-喬登消去法[程式碼](https://github.com/CHUANG-CR/Linear-Algebra/blob/main/Gauss-Jordan.cpp)
+## 高斯-喬登消去法: [程式碼](https://github.com/CHUANG-CR/Linear-Algebra/blob/main/Gauss-Jordan.cpp)
  **功能概述**：將任意矩陣透過基本列運算，化簡為**簡化列梯形矩陣**。
  **實作細節與邏輯**：
   * 演算法的核心在於逐行尋找並確立前導 1。
   * 在處理過程中，若在當前列的目標位置找不到前導 1，程式的處理邏輯會往下搜尋下一行來尋找非零元素，並透過列交換來繼續運算，確保化簡過程不會中斷。
   * 透過雙層或三層迴圈將主對角線以外的元素皆化為 0，為後續解線性聯立方程組奠定基礎。
 
-## 反矩陣計算[程式碼](https://github.com/CHUANG-CR/Linear-Algebra/blob/main/Inverse.cpp)
+## 反矩陣計算: [程式碼](https://github.com/CHUANG-CR/Linear-Algebra/blob/main/Inverse.cpp)
  **功能概述**：計算給定之非奇異方陣的反矩陣。
  **實作細節與邏輯**：
   * 演算法利用了高斯-喬登消去法的延伸應用：建立一個增廣矩陣，將原矩陣與同維度的單位矩陣並排。
   * 對整個增廣矩陣持續進行基本列運算。當左半部的矩陣成功轉換為單位矩陣右半部原本的矩陣就會同步轉換為我們所求的反矩陣。
   * 程式中隱含了可逆性的檢查，若在化簡過程中左側出現全為 0 的列，即代表該矩陣不可逆（奇異矩陣）。
 
-## 行列式值計算[程式碼](https://github.com/CHUANG-CR/Linear-Algebra/blob/main/Determinant.cpp)
+## 行列式值計算: [程式碼](https://github.com/CHUANG-CR/Linear-Algebra/blob/main/Determinant.cpp)
  **功能概述**：計算方陣的行列式值。
  **實作細節與邏輯**：
   * 實作上透過高斯消去法的概念，將原矩陣逐步化為**上三角矩陣**。
